@@ -69,9 +69,10 @@ runs:
       id: tag
       run: |
         tag="${{ inputs.tag }}"  
-        if [ -z "${tag}" ]{
+        if [ -z "${tag}" ]
+        then
           tag=$(date +%Y.%m.%d)
-        }
+        fi
         echo "tag=${tag}" >> $GITHUB_OUTPUT
       shell: bash
 
