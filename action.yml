@@ -12,6 +12,12 @@ inputs:
     description: name of the image that will be stored into ghcr
     required: false
     default: "rocker/rstudio:4.2.2"
+  repo-user:
+    description: User access project container registry 
+    required: true
+  repo-token:
+    description: Token to access project container registry 
+    required: true
   tag:
     description: |
       Custom Image Tag/Version. Defaults to current date in the `YYYY.MM.DD` format if unspecified.
@@ -87,8 +93,8 @@ runs:
       uses: docker/login-action@v2
       with:
         registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        username: ${{ inputs.repo-user }} # ${{ github.actor }}
+        password: ${{ inputs.repo-token }} # ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set build variables 📐
       id: build_vars
@@ -105,6 +111,7 @@ runs:
           full_names="$full_names,${{ env.REGISTRY }}/${{ github.repository_owner }}/${image_name}:latest"
         fi
         echo "FULL_NAMES=${full_names}" >> $GITHUB_OUTPUT
+      shell: bash
 
     - name: Build and push image 🏗
       uses: docker/build-push-action@v3
@@ -131,4 +138,5 @@ runs:
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
         }
         fi
+      shell: bash
 
