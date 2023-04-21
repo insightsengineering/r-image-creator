@@ -116,18 +116,18 @@ runs:
           full_names="$full_names,${{ env.REGISTRY }}/${{ inputs.repository_owner }}/${image_name}:latest"
         fi
         echo "FULL_NAMES=${full_names}" >> $GITHUB_OUTPUT
-      shell: bash
 
-    - name: Debug traces
-      run: |
-        ls -al
+        # get current action dockerfile path
+        echo "${{ github.action_path }}"
+        ls -al "${{ github.action_path }}"
+        echo "DOCKERFILE_PATH=${{ github.action_path }}/Dockerfile" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Build and push image 🏗
       uses: docker/build-push-action@v3
       with:
         context: ./
-        file: Dockerfile
+        file: ${{ steps.build_vars.outputs.DOCKERFILE_PATH }}
         push: true
         tags: ${{ steps.build_vars.outputs.FULL_NAMES }}
         cache-from: type=local,src=/tmp/.buildx-cache
