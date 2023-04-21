@@ -3,19 +3,19 @@
 
 renv="${1}"
 
-if [ -f "$renv" ]{
+if [ -f "$renv" ]
+then
     echo "renv file found locally"
     cp "$renv" ./renv.lock
-}
-elif [ ! -z "$renv" ] {
+elif [ ! -z "$renv" ]
+then
     curl -LJO "$renv"
-    if [ -f "./renv.lock" ]{
+    if [ -f "./renv.lock" ]
+    then
         echo "Fail to download renv.lock file from $renv URL"
         exit 1
-    }
-}
-else {
+    fi
+else 
     echo "wrong argument used for renv path/url : should be path to renv or an URL to download renv file"
     exit 1
-}
 fi
