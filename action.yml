@@ -118,6 +118,11 @@ runs:
         echo "FULL_NAMES=${full_names}" >> $GITHUB_OUTPUT
       shell: bash
 
+    - name: Debug traces
+      run: |
+        ls -al
+      shell: bash
+
     - name: Build and push image 🏗
       uses: docker/build-push-action@v3
       with:
