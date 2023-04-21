@@ -1,12 +1,12 @@
 # Build arguments
-ARG BASE_IMAGE
-ARG SYSDEPS
-ARG RENV_LOCK
-ARG OTHER_PKG 
-ARG REPOS
+ARG BASE_IMAGE="rocker/rstudio:4.3"
+ARG SYSDEPS=""
+ARG RENV_LOCK=""
+ARG OTHER_PKG=""
+ARG REPOS=""
 
 # Fetch base image
-FROM BASE_IMAGE
+FROM $BASE_IMAGE
 
 # Set image metadata
 LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
@@ -19,13 +19,14 @@ WORKDIR /workspace
 
 # Copy installation scripts
 COPY --chmod=0755 ./scripts /scripts
-
+# Conditionnal copy of RENV_LOCK (conditionnal because this might be also a direct URL)
+COPY ./renv.lock? /workspace
 
 # Install all script
-RUN ./scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} 
+RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} 
 
 # delete scripts folder
-RUN rm -rf ./scripts
+RUN rm -rf /scripts
 
 # Run RStudio
 CMD ["/init"]

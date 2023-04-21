@@ -10,7 +10,7 @@ if [ -z "${sysdeps}" ]{
 }
 
 if [ -z "${renv_lock}" ]{
-        Rscript ./restore_renv.R "${renv_lock}"
+        Rscript ./restore_renv.R
 }
 
 if [ -z "${other_pkg}" ]{

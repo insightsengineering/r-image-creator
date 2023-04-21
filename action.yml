@@ -121,6 +121,13 @@ runs:
         echo "${{ github.action_path }}"
         ls -al "${{ github.action_path }}"
         echo "DOCKERFILE_PATH=${{ github.action_path }}/Dockerfile" >> $GITHUB_OUTPUT
+        
+        # if input renv-lock-file specified, check if renv.lock file exists locally - else try to download it
+        if [ ! -z "${{ inputs.renv-lock-file }}" ]
+        then
+          eval "${{ github.action_path }}/scripts/get_renv_file.sh"
+        fi
+
       shell: bash
 
     - name: Build and push image 🏗
@@ -149,4 +156,3 @@ runs:
         }
         fi
       shell: bash
-
