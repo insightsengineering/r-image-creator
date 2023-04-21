@@ -125,8 +125,10 @@ runs:
         # if input renv-lock-file specified, check if renv.lock file exists locally - else try to download it
         if [ ! -z "${{ inputs.renv-lock-file }}" ]
         then
-          chmod +x "${{ github.action_path }}/scripts/get_renv_file.sh"
-          eval "${{ github.action_path }}/scripts/get_renv_file.sh"
+          script_path="${{ github.action_path }}/scripts/get_renv_file.sh"
+          cp $script_path ./
+          chmod +x ./get_renv_file.sh
+          ./get_renv_file.sh" "${{ inputs.renv-lock-file }}"
         fi
 
       shell: bash
