@@ -128,7 +128,7 @@ runs:
           script_path="${{ github.action_path }}/scripts/get_renv_file.sh"
           cp $script_path ./
           chmod +x ./get_renv_file.sh
-          ./get_renv_file.sh" "${{ inputs.renv-lock-file }}"
+          ./get_renv_file.sh "${{ inputs.renv-lock-file }}"
         fi
 
       shell: bash
