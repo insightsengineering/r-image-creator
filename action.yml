@@ -143,11 +143,11 @@ runs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
         build-args: |
-          BASE_IMAGE="${{ inputs.base-image }}"
-          SYSDEPS="${{ inputs.base-image }}"
-          RENV_LOCK="${{ inputs.renv-lock-file }}"
-          OTHER_PKG="${{ inputs.packages }}"
-          REPOS="${{ inputs.repos }}"
+          BASE_IMAGE=${{ inputs.base-image }}
+          SYSDEPS=${{ inputs.base-image }}
+          RENV_LOCK=${{ inputs.renv-lock-file }}
+          OTHER_PKG=${{ inputs.packages }}
+          REPOS=${{ inputs.repos }}
         platforms: linux/amd64
 
     - name: Move cache ♻️
