@@ -24,7 +24,7 @@ packages_list <- as.list(strsplit(str_squish(packages_list), ',')[[1]])
 
 
 # Install only uninstalled packages
-if (length(new_pkgs)) {
+if (length(packages_list)) {
   install.packages(
     packages_list,
     repos = repos_list,
