@@ -133,6 +133,7 @@ runs:
           chmod +x ./get_renv_file.sh
           ./get_renv_file.sh "${{ inputs.renv-lock-file }}"
         fi
+        echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }}"
 
       shell: bash
 
@@ -147,7 +148,7 @@ runs:
         cache-to: type=local,dest=/tmp/.buildx-cache-new
         build-args: |
           BASE_IMAGE=${{ inputs.base-image }}
-          SYSDEPS=${{ inputs.base-image }}
+          SYSDEPS=${{ inputs.sysdeps }}
           RENV_LOCK=${{ inputs.renv-lock-file }}
           OTHER_PKG=${{ inputs.packages }}
           REPOS=${{ inputs.repos }}
