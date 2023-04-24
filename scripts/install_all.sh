@@ -12,10 +12,10 @@ fi
 
 if [ -z "${renv_lock}" ]
 then
-        Rscript /scripts/restore_renv.R
+        /scripts/restore_renv.sh
 fi
 
 if [ -z "${other_pkg}" ]
 then
-        /scripts/install_other_pkgs.sh "${other_pkg}" "${repos}"
+        Rscript /scripts/install_other_pkgs.R "${other_pkg}" "${repos}"
 fi
