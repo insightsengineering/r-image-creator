@@ -1,5 +1,10 @@
 #!/usr/bin/env Rscript
 
+# install needed packages 
+install.packages("stringr", repos="https://cloud.r-project.org/")
+
+library(stringr)
+
 # Script that installs R packages from alternate sources.
 # Takes in the repos list as the first argument, and packages to install as 2nd arg
 args <- commandArgs(trailing = TRUE)
