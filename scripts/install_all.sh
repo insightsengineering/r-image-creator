@@ -7,15 +7,15 @@ repos=$4 # repos list
 
 if [ -z "${sysdeps}" ]
 then
-        ./install_sysdeps.sh "${sysdeps}"
+        /scripts/install_sysdeps.sh "${sysdeps}"
 fi
 
 if [ -z "${renv_lock}" ]
 then
-        Rscript ./restore_renv.R
+        Rscript /scripts/restore_renv.R
 fi
 
 if [ -z "${other_pkg}" ]
 then
-        ./install_other_pkgs.sh "${other_pkg}" "${repos}"
+        /scripts/install_other_pkgs.sh "${other_pkg}" "${repos}"
 fi
