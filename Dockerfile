@@ -19,8 +19,9 @@ WORKDIR /workspace
 
 # Copy installation scripts
 COPY --chmod=0755 ./scripts /scripts
+
 # Conditionnal copy of RENV_LOCK (conditionnal because this might be also a direct URL)
-COPY ./renv.lock? /workspace
+COPY ./renv.lock /workspace
 
 # Install all script
 RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} 
