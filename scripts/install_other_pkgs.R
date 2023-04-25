@@ -33,11 +33,3 @@ if (length(packages_list)) {
     upgrade = "never"
   )
 }
-
-install.packages(
-    c("admiraldev", "admiral.test"),
-    repos = 'https://cloud.r-project.org',
-    Ncpus = parallel::detectCores(),
-    ask = FALSE,
-    upgrade = "never"
-  )
