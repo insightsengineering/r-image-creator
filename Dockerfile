@@ -1,12 +1,14 @@
 # Build arguments
 ARG BASE_IMAGE="rocker/rstudio:4.3"
+
+# Fetch base image
+FROM $BASE_IMAGE
+
+# Build arguments
 ARG SYSDEPS=""
 ARG RENV_LOCK=""
 ARG OTHER_PKG=""
 ARG REPOS=""
-
-# Fetch base image
-FROM $BASE_IMAGE
 
 # Set image metadata
 LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
@@ -28,6 +30,7 @@ ENV RENV_VERSION 0.16.0
 RUN R -e "install.packages(c(\"remotes\", \"renv\"), repos=\"https://cloud.r-project.org/\")"
 
 # Install all script
+RUN echo "/scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS}"
 RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} 
 
 # delete scripts folder
