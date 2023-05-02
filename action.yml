@@ -107,7 +107,7 @@ runs:
         # Set Image name
         image_name="${{ inputs.image-name }}"
         tag="${{ steps.tag.outputs.tag }}"
-        tag_latest="${{ inputs.tag_latest }}"
+        tag_latest="${{ inputs.tag-latest }}"
 
         # Set full image name
         full_names="${{ env.REGISTRY }}/${{ inputs.repository_owner }}/${image_name}:${tag}"
