@@ -11,7 +11,7 @@ inputs:
   image-name:
     description: name of the image that will be stored into ghcr
     required: false
-    default: "rocker/rstudio:4.2.2"
+    default: "rocker/rstudio:4.3.0"
   repository_owner: 
     description: Repository owner (image will be pushed on ghcr/repository_owner)
     required: true
@@ -33,7 +33,7 @@ inputs:
   base-image:
     description: 'Base image'
     required: false
-    default: 'rocker/rstudio:4.2.2'
+    default: 'rocker/rstudio:4.3.0'
   sysdeps:
     description: |
       A list of system dependencies to install on the image.
@@ -65,9 +65,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout repository 💳
-      uses: actions/checkout@v3
-
     - name: Define tag
       id: tag
       run: |

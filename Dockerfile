@@ -1,5 +1,5 @@
 # Build arguments
-ARG BASE_IMAGE="rocker/rstudio:4.3"
+ARG BASE_IMAGE="rocker/rstudio:4.3.0"
 
 # Fetch base image
 FROM $BASE_IMAGE
@@ -26,11 +26,10 @@ COPY --chmod=0755 ./scripts /scripts
 COPY ./renv.lock /workspace
 
 # Install remote and renv from GitHub.
-ENV RENV_VERSION 0.16.0  
-RUN R -e "install.packages(c(\"remotes\", \"renv\"), repos=\"https://cloud.r-project.org/\")"
+ARG RENV_VERSION=0.16.0  
+RUN R -e "install.packages(c("remotes", "renv"), repos="https://cloud.r-project.org/")'
 
 # Install all script
-RUN echo "/scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS}"
 RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} 
 
 # delete scripts folder

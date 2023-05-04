@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Install all  
 
 sysdeps=$1 # sys dependencies list

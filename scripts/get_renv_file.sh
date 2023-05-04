@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # if specified, first argument shoud be path to renv.lock local file, or a public URL to an renv.lock file
 # Script that get renv.lock path from file path or URL 
 

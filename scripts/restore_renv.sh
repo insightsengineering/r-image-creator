@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 # Script that restore renv packages
 
 if [ -f "/workspace/renv.lock" ]
