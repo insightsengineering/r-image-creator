@@ -25,9 +25,12 @@ COPY --chmod=0755 ./scripts /scripts
 # Copy of RENV_LOCK (conditionnal because this might be also a direct URL)
 COPY ./renv.lock /workspace
 
-# Install remote and renv from GitHub.
-ARG RENV_VERSION=0.16.0  
-RUN R -e 'install.packages(c("remotes", "renv@${RENV_VERSION}"), repos="https://cloud.r-project.org/")'
+# Install remote 
+RUN R -e 'install.packages(c("remotes"), repos="https://cloud.r-project.org/")'
+
+# Install renv from GitHub.
+ENV RENV_VERSION 0.16.0  
+RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
 
 # Install all script
 RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} 
