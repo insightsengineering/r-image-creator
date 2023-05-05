@@ -27,7 +27,7 @@ COPY ./renv.lock /workspace
 
 # Install remote and renv from GitHub.
 ARG RENV_VERSION=0.16.0  
-RUN R -e "install.packages(c("remotes", "renv"), repos="https://cloud.r-project.org/")'
+RUN R -e 'install.packages(c("remotes", "renv@${RENV_VERSION}"), repos="https://cloud.r-project.org/")'
 
 # Install all script
 RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} 
