@@ -29,7 +29,7 @@ COPY ./renv.lock /workspace
 RUN R -e 'install.packages(c("remotes"), repos="https://cloud.r-project.org/")'
 
 # Install renv from GitHub.
-ENV RENV_VERSION=0.16.0  
+ENV RENV_VERSION=0.17.0  
 RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
 
 # Install all script
