@@ -51,7 +51,8 @@ inputs:
     default: ''
   packages:
     description: |
-      A comma-separated list of R packages that should be installed on the image. Dependencies will be fetched from the 'repos' option specified below.
+      A comma-separated list of R packages that should be installed on the image.
+      Dependencies will be fetched from the 'repos' option specified below.
       Eg: 'pharmaverse/admiral,pharmaverse/admiralonco,dplyr'
     required: false
     default: ''
