@@ -16,10 +16,10 @@ inputs:
     description: Repository owner (image will be pushed on ghcr/repository_owner)
     required: true
   repo-user:
-    description: User access project container registry. Github variable `${{ github.actor }}` can be used.
+    description: User access project container registry. Github variable `github.actor` can be used.
     required: true
   repo-token:
-    description: Token to access project container registry. Github variable `${{ secrets.GITHUB_TOKEN }}` can be used.
+    description: Token to access project container registry. Github variable `GITHUB_TOKEN` can be used.
     required: true
   tag:
     description: |
