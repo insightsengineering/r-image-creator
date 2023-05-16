@@ -1,7 +1,11 @@
 #!/usr/bin/env Rscript
 
-# install needed packages 
-install.packages("stringr", repos="https://cloud.r-project.org/")
+# install needed packages
+
+if (!require("stringr", quietly = sd_quiet)) {
+  install.packages("stringr", repos = "https://cloud.r-project.org/")
+}
+
 
 library(stringr)
 
