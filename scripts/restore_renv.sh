@@ -7,7 +7,7 @@ then
     cd /workspace
     R -e "renv::init(bare = TRUE)"
     R -e "renv::restore()"
-    R -e "renv::isolate()" # isolate renv to be independent from cache librairies and store everything under renv/library
+    # R -e "renv::isolate()" # isolate renv to be independent from cache librairies and store everything under renv/library
 else
     echo "renv.lock file not found"
     exit 1
