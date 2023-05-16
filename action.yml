@@ -1,10 +1,8 @@
 name: R Image Creator
-author: Daphne Grasselly
+author: Roche/Genentech - Insights Engineering
 description: |
-  Creates R images on demand, given a base R image, a set of system dependencies, an renv lock file
-  or even a set of R packages along with repositories that can be used for installing dependencies.
-  This action will publish images exclusively to ghcr.io (GitHub Container Registry).
-  DockerHub is not supported at the moment.
+  Creates R images on demand, given a base R image, a set of system dependencies, an renv lock file or even a set of R packages along with repositories that can be used for installing dependencies.
+  This action will publish packages exclusively to ghcr.io (Github Container Registry). DockerHub is not supported at the moment.
 
 env:
   REGISTRY: ghcr.io
@@ -14,14 +12,14 @@ inputs:
     description: name of the image that will be stored into ghcr
     required: false
     default: "rocker/rstudio:4.3.0"
-  repository_owner: 
+  repository_owner:
     description: Repository owner (image will be pushed on ghcr/repository_owner)
     required: true
   repo-user:
-    description: User access project container registry 
+    description: User access project container registry. Github variable `${{ github.actor }}` can be used.
     required: true
   repo-token:
-    description: Token to access project container registry 
+    description: Token to access project container registry. Github variable `${{ secrets.GITHUB_TOKEN }}` can be used.
     required: true
   tag:
     description: |
@@ -31,6 +29,7 @@ inputs:
   tag-latest:
     description: Tag image as `latest`
     default: false
+    required: false
     type: boolean
   base-image:
     description: 'Base image'
@@ -53,8 +52,7 @@ inputs:
     default: ''
   packages:
     description: |
-      A comma-separated list of R packages that should be installed on the image.
-      Dependencies will be fetched from the 'repos' option specified below.
+      A comma-separated list of R packages that should be installed on the image. Dependencies will be fetched from the 'repos' option specified below.
       Eg: 'pharmaverse/admiral,pharmaverse/admiralonco,dplyr'
     required: false
     default: ''
@@ -71,7 +69,7 @@ runs:
     - name: Define tag
       id: tag
       run: |
-        tag="${{ inputs.tag }}"  
+        tag="${{ inputs.tag }}"
         if [ -z "${tag}" ]
         then
           tag=$(date +%Y.%m.%d)
@@ -124,7 +122,7 @@ runs:
 
         # copy scripts folder on top
         cp -r "${{ github.action_path }}/scripts" ./
-        
+
         # if input renv-lock-file specified, check if renv.lock file exists locally - else try to download it
         if [ ! -z "${{ inputs.renv-lock-file }}" ]
         then
