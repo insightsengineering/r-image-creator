@@ -17,12 +17,6 @@ repos_list <- as.list(strsplit(repos_list, ','))[[1]]
 packages_list <- as.list(strsplit(packages_list, ','))[[1]]
 
 
-#nest_packages <- c(
-#  "scda.2021",
-#  "scda.2022"
-#)
-
-
 # Install only uninstalled packages
 if (length(packages_list)) {
   install.packages(
