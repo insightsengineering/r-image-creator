@@ -2,7 +2,7 @@
 
 # install needed packages
 
-if (!require("stringr", quietly = sd_quiet)) {
+if (!require("stringr", quietly = TRUE)) {
   install.packages("stringr", repos = "https://cloud.r-project.org/")
 }
 
