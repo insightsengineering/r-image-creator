@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-# Install all  
+# Install all
 
 sysdeps=$1 # sys dependencies list
 renv_lock=$2 # renv lock file path or URL
-other_pkg=$3 # R pkg list
-repos=$4 # repos list
+update_libpath=$3 # update .libPaths() paths
+other_pkg=$4 # R pkg list
+repos=$5 # repos list
 
 if [ ! -z "${sysdeps}" ]
-then    
+then
         echo "Run install_sysdeps ${sysdeps}"
         /scripts/install_sysdeps.sh "${sysdeps}"
 fi
@@ -15,7 +16,7 @@ fi
 if [ ! -z "${renv_lock}" ]
 then
         echo "Run restore renv"
-        /scripts/restore_renv.sh
+        /scripts/restore_renv.sh "${update_libpath}"
 fi
 
 if [ ! -z "${other_pkg}" ]

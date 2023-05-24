@@ -86,6 +86,15 @@ This can also be a remote location (i.e. a GitHub raw URL etc).
 
   _Default_: `""`
 
+* `update-libpath`:
+
+  _Description_: If renv.lock file found, a brand renv environment will be created inside the docker image (under /workspace working dir).
+If update-libpath set to true, the file under $R_HOME/etc/Renviron.site will be updated (this means /workspace/renv librairies path will be added to global lib paths).
+
+  _Required_: `false`
+
+  _Default_: `True`
+
 * `packages`:
 
   _Description_: A comma-separated list of R packages that should be installed on the image. Dependencies will be fetched from the 'repos' option specified below.
