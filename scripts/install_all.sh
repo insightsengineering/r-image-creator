@@ -3,9 +3,8 @@
 
 sysdeps=$1 # sys dependencies list
 renv_lock=$2 # renv lock file path or URL
-update_libpath=$3 # update .libPaths() paths
-other_pkg=$4 # R pkg list
-repos=$5 # repos list
+other_pkg=$3 # R pkg list
+repos=$4 # repos list
 
 if [ ! -z "${sysdeps}" ]
 then
@@ -16,7 +15,7 @@ fi
 if [ ! -z "${renv_lock}" ]
 then
         echo "Run restore renv"
-        /scripts/restore_renv.sh "${update_libpath}"
+        /scripts/restore_renv.sh
 fi
 
 if [ ! -z "${other_pkg}" ]
