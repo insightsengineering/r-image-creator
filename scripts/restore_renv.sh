@@ -17,6 +17,11 @@ then
         cd /tmp/renv-cache
         cp /workspace/renv.lock ./renv.lock
 
+        echo "update Renviron and Renviron.site files"
+        echo "R_LIBS=/renv/cache" >> $R_HOME/etc/Renviron
+        echo "RENV_PATHS_CACHE=/renv/cache" >> $R_HOME/etc/Renviron
+        echo "R_LIBS_USER=/renv/cache" >> $R_HOME/etc/Renviron
+
         # Install remote
         R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/', lib='$RENV_PATHS_CACHE')"
 
@@ -33,11 +38,6 @@ then
         rm -rf /tmp/renv-cache
         rm -rf /tmp/Rtmp*
         rm /workspace/renv.lock
-
-        echo "update Renviron and Renviron.site files"
-        echo "R_LIBS=/renv/cache" >> $R_HOME/etc/Renviron
-        echo "RENV_PATHS_CACHE=/renv/cache" >> $R_HOME/etc/Renviron
-        echo "R_LIBS_USER=/renv/cache" >> $R_HOME/etc/Renviron
     fi
 else
     echo "renv.lock file not found"
