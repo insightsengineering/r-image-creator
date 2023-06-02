@@ -31,5 +31,8 @@ RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS}
 # delete scripts folder
 RUN rm -rf /scripts
 
+# add env variable DOCKER_CONTAINER_CONTEXT
+ENV DOCKER_CONTAINER_CONTEXT="true"
+
 # Run RStudio
 CMD ["/init"]
