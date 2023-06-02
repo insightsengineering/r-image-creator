@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install all  
+# Install all
 
 sysdeps=$1 # sys dependencies list
 renv_lock=$2 # renv lock file path or URL
@@ -7,7 +7,7 @@ other_pkg=$3 # R pkg list
 repos=$4 # repos list
 
 if [ ! -z "${sysdeps}" ]
-then    
+then
         echo "Run install_sysdeps ${sysdeps}"
         /scripts/install_sysdeps.sh "${sysdeps}"
 fi
