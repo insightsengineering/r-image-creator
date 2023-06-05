@@ -60,6 +60,10 @@ inputs:
     required: false
     default: 'https://cloud.r-project.org'
 
+branding:
+  icon: 'image'
+  color: 'red'
+
 runs:
   using: "composite"
   steps:
