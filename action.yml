@@ -1,9 +1,6 @@
 name: R Image Creator
 author: Roche/Genentech - Insights Engineering
-description: |
-  Creates R images on demand, given a base R image, a set of system dependencies, an renv lock file or even a set of R packages along with repositories that can be used for installing dependencies.
-  This action will publish packages exclusively to ghcr.io (Github Container Registry). DockerHub is not supported at the moment.
-
+description: Create R images on demand, given a base R image, a set of system dependencies, and an renv lock file.
 env:
   REGISTRY: ghcr.io
 
