@@ -3,3 +3,4 @@ renv.lock
 .Rprofile
 activate.R
 renv
+.vscode
