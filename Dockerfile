@@ -2,6 +2,7 @@
 ARG BASE_IMAGE="rocker/rstudio:4.3.0"
 
 # Fetch base image
+# hadolint ignore=DL3006
 FROM $BASE_IMAGE
 
 # Build arguments
@@ -25,11 +26,9 @@ COPY --chmod=0755 ./scripts /scripts
 # Copy of RENV_LOCK (conditionnal because this might be also a direct URL)
 COPY ./renv.lock /workspace
 
-# Install all script
-RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS}
-
-# delete scripts folder
-RUN rm -rf /scripts
+# Install everything
+RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} && \
+    rm -rf /scripts
 
 # add env variable DOCKER_CONTAINER_CONTEXT
 ENV DOCKER_CONTAINER_CONTEXT="true"
