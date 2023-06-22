@@ -14,21 +14,21 @@ Roche/Genentech - Insights Engineering
 ### Inputs
 * `image-name`:
 
-  _Description_: name of the image that will be stored into ghcr
+  _Description_: name of the image that will be stored into ghcr (Note that image full name will be built from the action inputs: `ghcr/repository-owner/image-name:tag`)
 
   _Required_: `false`
 
   _Default_: `rocker/rstudio:4.3.0`
 
-* `repository_owner`:
+* `repository-owner`:
 
-  _Description_: Repository owner (image will be pushed on ghcr/repository_owner)
+  _Description_: Repository owner. Github variable `${{ github.repository_owner }}` can be used. (This variable is used to build the full name of the image that will be stored in ghcr)
 
   _Required_: `true`
 
 * `repo-user`:
 
-  _Description_: User access project container registry. Github variable `${{ github.actor }}` can be used.
+  _Description_: User name to access project container registry. Github variable `${{ github.actor }}` can be used.
 
   _Required_: `true`
 

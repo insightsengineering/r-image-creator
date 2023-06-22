@@ -7,8 +7,8 @@ inputs:
     description: name of the image that will be stored into ghcr
     required: false
     default: "rocker/rstudio:4.3.0"
-  repository_owner:
-    description: Repository owner (image will be pushed on ghcr/repository_owner)
+  repository-owner:
+    description: Repository owner (image will be pushed on ghcr/repository-owner)
     required: true
   repo-user:
     description: User access project container registry. Github variable `github.actor` can be used.
@@ -106,10 +106,10 @@ runs:
         tag_latest="${{ inputs.tag-latest }}"
 
         # Set full image name
-        full_names="ghcr.io/${{ inputs.repository_owner }}/${image_name}:${tag}"
+        full_names="ghcr.io/${{ inputs.repository-owner }}/${image_name}:${tag}"
         if [ "${tag_latest}" == "true" ]
         then
-          full_names="$full_names,ghcr.io/${{ inputs.repository_owner }}/${image_name}:latest"
+          full_names="$full_names,ghcr.io/${{ inputs.repository-owner }}/${image_name}:latest"
         fi
         echo "FULL_NAMES=${full_names}" >> $GITHUB_OUTPUT
 
