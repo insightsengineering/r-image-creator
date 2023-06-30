@@ -37,6 +37,9 @@ then
         rm -rf /tmp/renv-cache
         rm -rf /tmp/Rtmp*
         rm /workspace/renv.lock
+
+        # change /renv/cache permissions (users might want to install their own librairies)
+        chmod 777 "$RENV_PATHS_CACHE"
     fi
 else
     echo "renv.lock file not found"
