@@ -20,6 +20,7 @@ then
         echo "update Renviron and Renviron.site files"
         echo "R_LIBS=/renv/cache" >> $R_HOME/etc/Renviron.site
         echo "RENV_PATHS_CACHE=/renv/cache" >> $R_HOME/etc/Renviron.site
+        echo 'DOCKER_CONTAINER_CONTEXT=true' >> $R_HOME/etc/Renviron.site
 
         # Install remote
         R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/', lib='$RENV_PATHS_CACHE')"
