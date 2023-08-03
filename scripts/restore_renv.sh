@@ -2,6 +2,7 @@
 # Script that restore renv packages
 
 RENV_PATHS_CACHE=${RENV_PATHS_CACHE:-"/renv/cache"}
+R_LIBS=${R_LIBS:-"/renv/libs"}
 
 if [ -f "/workspace/renv.lock" ]
 then
@@ -18,19 +19,18 @@ then
         cp /workspace/renv.lock ./renv.lock
 
         echo "update Renviron and Renviron.site files"
-        echo "R_LIBS=/renv/cache" >> $R_HOME/etc/Renviron.site
-        echo "RENV_PATHS_CACHE=/renv/cache" >> $R_HOME/etc/Renviron.site
-        echo 'DOCKER_CONTAINER_CONTEXT=true' >> $R_HOME/etc/Renviron.site
+        echo "R_LIBS=$R_LIBS" >> $R_HOME/etc/Renviron.site
+        echo "RENV_PATHS_CACHE=$RENV_PATHS_CACHE" >> $R_HOME/etc/Renviron.site
 
         # Install remote
-        R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/', lib='$RENV_PATHS_CACHE')"
+        R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/', lib='$R_LIBS')"
 
         # Install renv from GitHub.
         RENV_VERSION=0.17.0
-        R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}', lib='$RENV_PATHS_CACHE')"
+        R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}', lib='$R_LIBS')"
 
         R -e 'renv::init(bare=TRUE)'
-        R -e "renv::restore(library='$RENV_PATHS_CACHE')"
+        R -e "renv::restore(library='$R_LIBS')"
 
         cd ..
 
@@ -41,6 +41,7 @@ then
 
         # change /renv/cache permissions (users might want to install their own librairies)
         chmod 777 "$RENV_PATHS_CACHE"
+        chmod 777 "$R_LIBS"
     fi
 else
     echo "renv.lock file not found"
