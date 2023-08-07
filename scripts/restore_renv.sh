@@ -26,7 +26,7 @@ then
         R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/', lib='$R_LIBS')"
 
         # Install renv from GitHub.
-        RENV_VERSION=0.17.0
+        RENV_VERSION=1.0.0
         R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}', lib='$R_LIBS')"
 
         R -e 'renv::init(bare=TRUE)'
