@@ -27,7 +27,7 @@ then
 
         # Install renv from GitHub.
         RENV_VERSION=1.0.0
-        R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}', lib='$R_LIBS')"
+        R -e "install.packages('https://packagemanager.posit.co/cran/latest/src/contrib/renv_1.0.0.tar.gz', type='source', lib='$R_LIBS')"
 
         R -e 'renv::init(bare=TRUE)'
         R -e "renv::restore(library='$R_LIBS')"
