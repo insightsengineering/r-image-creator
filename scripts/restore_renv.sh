@@ -10,8 +10,9 @@ then
     # update global libPath if enabled
     if [ -z "${update_libpath}" ]
     then
-        echo "create $RENV_PATHS_CACHE folder"
+        echo "create $RENV_PATHS_CACHE and $R_LIBS folders "
         mkdir -p "$RENV_PATHS_CACHE"
+        mkdir -p "$R_LIBS"
 
         echo "Install renv R package..."
         mkdir /tmp/renv-cache
