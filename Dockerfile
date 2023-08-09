@@ -1,5 +1,5 @@
 # Build arguments
-ARG BASE_IMAGE="rocker/rstudio:4.3.0"
+ARG BASE_IMAGE="rocker/rstudio:4.3.1"
 
 # Fetch base image
 # hadolint ignore=DL3006
@@ -27,7 +27,7 @@ COPY --chmod=0755 ./scripts /scripts
 COPY ./renv.lock /workspace
 
 # Install everything
-RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${OTHER_PKG} ${REPOS} && \
+RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} && \
     rm -rf /scripts
 
 # Run RStudio

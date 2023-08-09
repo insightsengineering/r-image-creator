@@ -118,7 +118,7 @@ runs:
         ls -al "${{ github.action_path }}"
         echo "DOCKERFILE_PATH=${{ github.action_path }}/Dockerfile" >> $GITHUB_OUTPUT
 
-        # copy scripts folder on top
+        # copy scripts directory on top
         cp -r "${{ github.action_path }}/scripts" ./
 
         # if input renv-lock-file specified, check if renv.lock file exists locally - else try to download it
