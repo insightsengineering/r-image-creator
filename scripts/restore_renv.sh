@@ -31,7 +31,7 @@ then
         R -e "install.packages('https://packagemanager.posit.co/cran/latest/src/contrib/renv_1.0.0.tar.gz', type='source', lib='$R_LIBS')"
 
         R -e 'renv::init(bare=TRUE)'
-        R -e "renv::restore(library='$R_LIBS')"
+        R -e "renv::restore(library='$R_LIBS', prompt=FALSE)"
 
         cd ..
 
