@@ -34,7 +34,8 @@ if [ -f "/workspace/renv.lock" ]; then {
     install_version(
         'renv',
         version = '$RENV_VERSION',
-        lib = '$TMP_LIB'
+        lib = '$TMP_LIB',
+        repos = 'https://cloud.r-project.org'
     )
     library(
         'renv',
