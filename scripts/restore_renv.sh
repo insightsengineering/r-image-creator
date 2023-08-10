@@ -61,7 +61,7 @@ if [ -f "/workspace/renv.lock" ]; then {
 	# Clean up the /tmp directory
 	rm -rf /tmp/*
 	# change /renv/cache permissions (users might want to install their own librairies)
-	chmod 777 $RENV_PATHS_CACHE $RENV_PATHS_LIBRARY
+	chmod 777 $RENV_PATHS_CACHE $RENV_PATHS_LIBRARY "$RENV_PATHS_LIBRARY/$RENV_PLATFORM_PREFIX"
 }; else
 	{
 		echo "renv.lock file not found"
