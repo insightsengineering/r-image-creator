@@ -31,10 +31,24 @@ if [ -f "/workspace/renv.lock" ]; then {
         quietly = TRUE,
         verbose = FALSE
     )
-    install_version(
-        'renv',
-        version = '$RENV_VERSION',
-        lib = '$TMP_LIB'
+    tryCatch(
+        expr = {
+            install_version(
+                'renv',
+                version = '$RENV_VERSION',
+                lib = '$TMP_LIB'
+            )
+        },
+        error = function(e){
+            message('An Error Occurred while installing renv with remotes')
+            print(e)
+            print('remotes::install_version failed - use install_github instead')
+            install_github(
+                'rstudio/renv',
+                version = '$RENV_VERSION',
+                lib='$TMP_LIB'
+            )
+        }
     )
     library(
         'renv',
