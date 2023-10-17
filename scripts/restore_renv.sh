@@ -23,7 +23,8 @@ if [ -f "/workspace/renv.lock" ]; then {
 	R -e "
     install.packages(
         'remotes',
-        lib = '$TMP_LIB'
+        lib = '$TMP_LIB',
+	repos = 'https://cloud.r-project.org'
     )
     library(
         'remotes',
