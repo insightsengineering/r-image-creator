@@ -10,6 +10,7 @@ ARG SYSDEPS=""
 ARG RENV_LOCK=""
 ARG OTHER_PKG=""
 ARG REPOS=""
+ARG RENV_VERSION="1.0.3"
 
 # Set image metadata
 LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
@@ -27,7 +28,7 @@ COPY --chmod=0755 ./scripts /scripts
 COPY ./renv.lock /workspace
 
 # Install everything
-RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} && \
+RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} ${RENV_VERSION} && \
     rm -rf /scripts
 
 # Run RStudio

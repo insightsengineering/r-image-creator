@@ -57,6 +57,16 @@ inputs:
       Eg: 'https://cloud.r-project.org,https://cran.r-project.org'
     required: false
     default: 'https://cloud.r-project.org'
+  platforms:
+    description: |
+      A comma-separated list of platforms e.g. `linux/amd64,linux/arm64` that should be supported in Build job.'
+    required: false
+    default: 'linux/amd64'
+  renv-version:
+    description: |
+      A renv version used to restore an environment.'
+    required: false
+    default: '1.0.3'
 
 branding:
   icon: 'image'
@@ -76,8 +86,11 @@ runs:
         echo "tag=${tag}" >> $GITHUB_OUTPUT
       shell: bash
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
       id: buildx
       with:
         install: true
@@ -129,12 +142,12 @@ runs:
           chmod +x ./get_renv_file.sh
           ./get_renv_file.sh "${{ inputs.renv-lock-file }}"
         fi
-        echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }}"
+        echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }} ${{ inputs.renv-version}}"
 
       shell: bash
 
     - name: Build and push image 🏗
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v5
       with:
         context: ./
         file: ${{ steps.build_vars.outputs.DOCKERFILE_PATH }}
@@ -148,7 +161,8 @@ runs:
           RENV_LOCK=${{ inputs.renv-lock-file }}
           OTHER_PKG=${{ inputs.packages }}
           REPOS=${{ inputs.repos }}
-        platforms: linux/amd64
+          RENV_VERSION=${{ inputs.renv-version }}
+        platforms: ${{ inputs.platforms }} 
 
     - name: Move cache ♻️
       run: |
