@@ -24,7 +24,7 @@ if [ -f "/workspace/renv.lock" ]; then {
     install.packages(
         'remotes',
         lib = '$TMP_LIB',
-	repos = 'https://cloud.r-project.org'
+        repos = 'https://cloud.r-project.org'
     )
     library(
         'remotes',
@@ -36,7 +36,7 @@ if [ -f "/workspace/renv.lock" ]; then {
         'renv',
         version = '$RENV_VERSION',
         lib = '$TMP_LIB',
-	repos = 'https://cloud.r-project.org'
+        repos = 'https://cloud.r-project.org'
     )
     library(
         'renv',
