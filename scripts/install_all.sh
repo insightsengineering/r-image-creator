@@ -17,7 +17,7 @@ fi
 
 if [ ! -z "${renv_lock}" ]; then
 	echo "Run restore renv"
-	/scripts/restore_renv.sh ${renv_version}
+	/scripts/restore_renv.sh "${renv_version}"
 fi
 
 if [ ! -z "${other_pkg}" ]; then
