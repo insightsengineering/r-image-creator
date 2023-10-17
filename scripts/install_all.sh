@@ -8,6 +8,7 @@ sysdeps=$1   # sys dependencies list
 renv_lock=$2 # renv lock file path or URL
 repos=$3     # repos list
 other_pkg=$4 # R pkg list
+renv_version=$5
 
 if [ ! -z "${sysdeps}" ]; then
 	echo "Run install_sysdeps ${sysdeps}"
@@ -16,7 +17,7 @@ fi
 
 if [ ! -z "${renv_lock}" ]; then
 	echo "Run restore renv"
-	/scripts/restore_renv.sh
+	/scripts/restore_renv.sh ${renv_version}
 fi
 
 if [ ! -z "${other_pkg}" ]; then
