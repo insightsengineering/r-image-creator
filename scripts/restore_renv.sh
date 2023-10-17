@@ -3,6 +3,7 @@
 
 set -e
 
+RENV_VERSION=${1:-"1.0.3"}
 RENV_PATHS_CACHE=${RENV_PATHS_CACHE:-"/renv/cache"}
 RENV_PATHS_LIBRARY=${RENV_PATHS_LIBRARY:-"/renv/lib"}
 TMP_LIB=${TMP_LIB:-"/tmp/lib"}
@@ -18,7 +19,6 @@ RENV_PATHS_PREFIX_AUTO=FALSE
 if [ -f "/workspace/renv.lock" ]; then {
 	echo "Create $RENV_PATHS_CACHE and $RENV_PATHS_LIBRARY directories"
 	mkdir -p $RENV_PATHS_CACHE $RENV_PATHS_LIBRARY $TMP_LIB
-	RENV_VERSION=${1:-"1.0.3"}
 	# Install remote
 	R -e "
     install.packages(
