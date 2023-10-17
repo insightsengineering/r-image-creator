@@ -161,6 +161,7 @@ runs:
           RENV_LOCK=${{ inputs.renv-lock-file }}
           OTHER_PKG=${{ inputs.packages }}
           REPOS=${{ inputs.repos }}
+          RENV_VERSION=${{ inputs.renv-version }}
         platforms: ${{ inputs.platforms }} 
 
     - name: Move cache ♻️
