@@ -45,6 +45,11 @@ inputs:
       This can also be a remote location (i.e. a GitHub raw URL etc).
     required: false
     default: ''
+  description-file:
+    description: |
+      A location of a package DESCRIPTION file. all specified dependencies will be installed
+    required: false
+    default: ''
   packages:
     description: |
       A comma-separated list of R packages that should be installed on the image. Dependencies will be fetched from the 'repos' option specified below.
