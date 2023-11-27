@@ -28,6 +28,6 @@ fi
 
 if [ "${description}" != "None" ]; then
 	echo "Run install_pkgs_from_description"
-	cp -f /workspace/DESCRIPTION ./
+	cd /workspace
 	Rscript -e "install.packages('devtools');devtools::install(force = TRUE)"
 fi
