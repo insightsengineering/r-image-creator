@@ -38,24 +38,24 @@ inputs:
       Note that the sysdeps name should be OS-specific.
       Right now, only Debian OSes (installable via apt) are supported.
     required: false
-    default: ''
+    default: 'None'
   renv-lock-file:
     description: |
       A location of an renv.lock file that should be restored on the image.
       This can also be a remote location (i.e. a GitHub raw URL etc).
     required: false
-    default: ''
+    default: 'None'
   description-file:
     description: |
       A location of a package DESCRIPTION file. all specified dependencies will be installed
     required: false
-    default: ''
+    default: 'None'
   packages:
     description: |
       A comma-separated list of R packages that should be installed on the image. Dependencies will be fetched from the 'repos' option specified below.
       Eg: 'pharmaverse/admiral,pharmaverse/admiralonco,dplyr'
     required: false
-    default: ''
+    default: 'None'
   repos:
     description: |
       A comma-separated set of R package repository URLs that can be used for getting dependencies for the 'packages' installed.
@@ -168,7 +168,7 @@ runs:
           REPOS=${{ inputs.repos }}
           RENV_VERSION=${{ inputs.renv-version }}
           DESCRIPTION=${{ inputs.description-file }}
-        platforms: ${{ inputs.platforms }} 
+        platforms: ${{ inputs.platforms }}
 
     - name: Move cache ♻️
       run: |
