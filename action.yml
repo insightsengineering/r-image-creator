@@ -147,7 +147,7 @@ runs:
           chmod +x ./get_renv_file.sh
           ./get_renv_file.sh "${{ inputs.renv-lock-file }}"
         fi
-        echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }} ${{ inputs.renv-version}}"
+        echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }} ${{ inputs.renv-version }} ${{ inputs.description-file }}"
 
       shell: bash
 
@@ -167,6 +167,7 @@ runs:
           OTHER_PKG=${{ inputs.packages }}
           REPOS=${{ inputs.repos }}
           RENV_VERSION=${{ inputs.renv-version }}
+          DESCRIPTION=${{ inputs.description-file }}
         platforms: ${{ inputs.platforms }} 
 
     - name: Move cache ♻️
