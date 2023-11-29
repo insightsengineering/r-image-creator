@@ -53,6 +53,7 @@ inputs:
   packages:
     description: |
       A comma-separated list of R packages that should be installed on the image. Dependencies will be fetched from the 'repos' option specified below.
+      Can be also a remote location (i.e. a GitHub raw URL etc).
       Eg: 'pharmaverse/admiral,pharmaverse/admiralonco,dplyr'
     required: false
     default: 'None'
@@ -146,6 +147,13 @@ runs:
           cp $script_path ./
           chmod +x ./get_renv_file.sh
           ./get_renv_file.sh "${{ inputs.renv-lock-file }}"
+        fi
+        if [ "${{ inputs.description-file }}" != "None" ]
+        then
+          script_path="${{ github.action_path }}/scripts/get_description.sh"
+          cp $script_path ./
+          chmod +x ./get_description.sh
+          ./get_description.sh "${{ inputs.description-file }}"
         fi
         echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }} ${{ inputs.renv-version }} ${{ inputs.description-file }}"
 
