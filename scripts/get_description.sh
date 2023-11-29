@@ -12,7 +12,7 @@ if [ -f "$description" ]; then
 	cp "$description" ./DESCRIPTION
 elif [ ! -z "$description" ]; then
 	curl -LJO "$description"
-	if [ -f "./DESCRIPTION" ]; then
+	if [ ! -f "./DESCRIPTION" ]; then
 		echo "Fail to download DESCRIPTION file from $description URL"
 		exit 1
 	fi
