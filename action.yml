@@ -101,13 +101,13 @@ runs:
       with:
         install: true
 
-    # - name: Cache Docker layers ♻️
-    #   uses: actions/cache@v3
-    #   with:
-    #     path: /tmp/.buildx-cache
-    #     key: ${{ runner.os }}-buildx-${{ inputs.image-name }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-buildx-${{ inputs.image-name }}
+    - name: Cache Docker layers ♻️
+      uses: actions/cache@v3
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ inputs.image-name }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-${{ inputs.image-name }}
 
     - name: Log in to the Container registry 🗝
       uses: docker/login-action@v2
@@ -168,8 +168,8 @@ runs:
         file: ${{ steps.build_vars.outputs.DOCKERFILE_PATH }}
         push: true
         tags: ${{ steps.build_vars.outputs.FULL_NAMES }}
-        #cache-from: type=local,src=/tmp/.buildx-cache
-        #cache-to: type=local,dest=/tmp/.buildx-cache-new
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache-new
         build-args: |
           BASE_IMAGE=${{ inputs.base-image }}
           SYSDEPS=${{ inputs.sysdeps }}
