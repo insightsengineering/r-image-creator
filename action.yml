@@ -154,6 +154,8 @@ runs:
           cp $script_path ./
           chmod +x ./get_description.sh
           ./get_description.sh "${{ inputs.description-file }}"
+          echo "debug trace ls -al"
+          ls -al
         fi
         echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }} ${{ inputs.renv-version }} ${{ inputs.description-file }}"
 
