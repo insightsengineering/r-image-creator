@@ -33,4 +33,4 @@ if [ "${description}" != "None" ]; then
 fi
 
 echo "Installed Packages"
-R -e "installed_packages <- as.data.frame(installed.packages()); print(installed_packages[, c('Package', 'Version')])"
+R -e "installed_packages <- as.data.frame(installed.packages()); print(installed_packages[, c('Package', 'Version', 'LibPath')])"
