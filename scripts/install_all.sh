@@ -31,3 +31,6 @@ if [ "${description}" != "None" ]; then
 	cd /workspace
 	Rscript -e "install.packages('devtools');devtools::install(force = TRUE)"
 fi
+
+echo "Installed Packages"
+R -e "installed_packages <- as.data.frame(installed.packages()); print(installed_packages[, c('Package', 'Version')])"
