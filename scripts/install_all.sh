@@ -13,17 +13,17 @@ description=$6
 
 if [ "${sysdeps}" != "None" ]; then
 	echo "Run install_sysdeps ${sysdeps}"
-	/scripts/install_sysdeps.sh "${sysdeps}"
+	/workspace/scripts/install_sysdeps.sh "${sysdeps}"
 fi
 
 if [ "${renv_lock}" != "None" ]; then
 	echo "Run restore renv"
-	/scripts/restore_renv.sh "${renv_version}"
+	/workspace/scripts/restore_renv.sh "${renv_version}"
 fi
 
 if [ "${other_pkg}" != "None" ]; then
 	echo "Run install_other_pkgs - packages: ${other_pkg}"
-	Rscript /scripts/install_other_pkgs.R "${repos}" "${other_pkg}"
+	Rscript /workspace/scripts/install_other_pkgs.R "${repos}" "${other_pkg}"
 fi
 
 if [ "${description}" != "None" ]; then

@@ -24,9 +24,10 @@ WORKDIR /workspace
 
 # copy all content
 COPY . /workspace/
+RUN chmod -R 777 /workspace/
 
 # Install everything
-RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} ${RENV_VERSION} ${DESCRIPTION} && \
+RUN /workspace/scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} ${RENV_VERSION} ${DESCRIPTION} && \
     rm -rf /scripts
 
 # Run RStudio
