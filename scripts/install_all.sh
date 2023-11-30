@@ -27,6 +27,9 @@ if [ "${other_pkg}" != "None" ]; then
 fi
 
 if [ "${description}" != "None" ]; then
+	# set up R_LIBS_USER variable
+	echo "Update Renviron.site files"
+	echo "R_LIBS_USER=/usr/local/lib/R/site-library" >> $R_HOME/etc/Renviron.site
 	echo "Run install_pkgs_from_description"
 	cd /workspace
 	Rscript -e "install.packages('devtools');devtools::install(force = TRUE)"
