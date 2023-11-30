@@ -20,3 +20,7 @@ else
 	echo "wrong argument used for DESCRIPTION path/url : should be path to DESCRIPTION or an URL to download DESCRIPTION file"
 	exit 1
 fi
+
+# set up R_LIBS_USER variable
+echo "Update Renviron.site files"
+echo "R_LIBS_USER=/usr/local/lib/R/site-library" >>$R_HOME/etc/Renviron.site
