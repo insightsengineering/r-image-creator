@@ -24,7 +24,7 @@ WORKDIR /workspace
 
 # copy all content
 COPY . /workspace/
-RUN chmod -R 777 /workspace/
+RUN find /workspace/ -name "*.sh" -type f -exec chmod 755 {} \;
 
 # Install everything
 RUN /workspace/scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} ${RENV_VERSION} ${DESCRIPTION} && \
