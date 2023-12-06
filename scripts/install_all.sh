@@ -33,7 +33,7 @@ if [ "${description}" != "None" ]; then
 	echo "Run install_pkgs_from_description"
 	cd /workspace
 	R -e "
-	repos_list <- as.list(strsplit('$repos', ","))[[1]]
+	repos_list <- as.list(strsplit('$repos', ','))[[1]]
 	options(repos=repos_list)
 	install.packages('devtools')
 	devtools::install(force = TRUE)
