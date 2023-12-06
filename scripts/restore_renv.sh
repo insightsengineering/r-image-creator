@@ -49,6 +49,8 @@ if [ -f "/workspace/renv.lock" ]; then {
         force = TRUE,
         restart = FALSE
     )
+    repos_list <- as.list(strsplit('$repos', ","))[[1]]
+    options(repos=repos_list)
     restore(
         lockfile = '/workspace/renv.lock',
         prompt = FALSE,

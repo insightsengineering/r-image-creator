@@ -32,7 +32,12 @@ if [ "${description}" != "None" ]; then
 	echo "R_LIBS_USER=/usr/local/lib/R/site-library" >> $R_HOME/etc/Renviron.site
 	echo "Run install_pkgs_from_description"
 	cd /workspace
-	Rscript -e "install.packages('devtools');devtools::install(force = TRUE)"
+	R -e "
+	repos_list <- as.list(strsplit('$repos', ","))[[1]]
+	options(repos=repos_list)
+	install.packages('devtools')
+	devtools::install(force = TRUE)
+	"
 fi
 
 echo "Installed Packages"
