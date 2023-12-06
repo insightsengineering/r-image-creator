@@ -22,14 +22,12 @@ LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
 # Set working directory
 WORKDIR /workspace
 
-# Copy installation scripts
-COPY --chmod=0755 ./scripts /scripts
-
-# Copy of RENV_LOCK (conditionnal because this might be also a direct URL)
-COPY ./renv.lock /workspace
+# copy all content
+COPY . /workspace/
+RUN find /workspace/ -name "*.sh" -type f -exec chmod 755 {} \;
 
 # Install everything
-RUN /scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} ${RENV_VERSION} ${DESCRIPTION} && \
+RUN /workspace/scripts/install_all.sh ${SYSDEPS} ${RENV_LOCK} ${REPOS} ${OTHER_PKG} ${RENV_VERSION} ${DESCRIPTION} && \
     rm -rf /scripts
 
 # Run RStudio

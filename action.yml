@@ -38,24 +38,25 @@ inputs:
       Note that the sysdeps name should be OS-specific.
       Right now, only Debian OSes (installable via apt) are supported.
     required: false
-    default: ''
+    default: 'None'
   renv-lock-file:
     description: |
       A location of an renv.lock file that should be restored on the image.
       This can also be a remote location (i.e. a GitHub raw URL etc).
     required: false
-    default: ''
+    default: 'None'
   description-file:
     description: |
       A location of a package DESCRIPTION file. all specified dependencies will be installed
     required: false
-    default: ''
+    default: 'None'
   packages:
     description: |
       A comma-separated list of R packages that should be installed on the image. Dependencies will be fetched from the 'repos' option specified below.
+      Can be also a remote location (i.e. a GitHub raw URL etc).
       Eg: 'pharmaverse/admiral,pharmaverse/admiralonco,dplyr'
     required: false
-    default: ''
+    default: 'None'
   repos:
     description: |
       A comma-separated set of R package repository URLs that can be used for getting dependencies for the 'packages' installed.
@@ -140,14 +141,24 @@ runs:
         cp -r "${{ github.action_path }}/scripts" ./
 
         # if input renv-lock-file specified, check if renv.lock file exists locally - else try to download it
-        if [ ! -z "${{ inputs.renv-lock-file }}" ]
+        if [ "${{ inputs.renv-lock-file }}" != "None" ]
         then
           script_path="${{ github.action_path }}/scripts/get_renv_file.sh"
           cp $script_path ./
           chmod +x ./get_renv_file.sh
           ./get_renv_file.sh "${{ inputs.renv-lock-file }}"
         fi
-        echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }} ${{ inputs.renv-version}}"
+        if [ "${{ inputs.description-file }}" != "None" ]
+        then
+          script_path="${{ github.action_path }}/scripts/get_description.sh"
+          cp $script_path ./
+          chmod +x ./get_description.sh
+          ./get_description.sh "${{ inputs.description-file }}"
+          echo "debug trace ls -al"
+          ls -al
+          cat DESCRIPTION
+        fi
+        echo "debug trace: /scripts/install_all.sh ${{ inputs.sysdeps }} ${{ inputs.renv-lock-file }} ${{ inputs.packages }} ${{ inputs.repos }} ${{ inputs.renv-version }} ${{ inputs.description-file }}"
 
       shell: bash
 
@@ -167,7 +178,8 @@ runs:
           OTHER_PKG=${{ inputs.packages }}
           REPOS=${{ inputs.repos }}
           RENV_VERSION=${{ inputs.renv-version }}
-        platforms: ${{ inputs.platforms }} 
+          DESCRIPTION=${{ inputs.description-file }}
+        platforms: ${{ inputs.platforms }}
 
     - name: Move cache ♻️
       run: |

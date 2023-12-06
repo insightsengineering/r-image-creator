@@ -11,23 +11,29 @@ other_pkg=$4 # R pkg list
 renv_version=$5
 description=$6
 
-if [ ! -z "${sysdeps}" ]; then
+if [ "${sysdeps}" != "None" ]; then
 	echo "Run install_sysdeps ${sysdeps}"
-	/scripts/install_sysdeps.sh "${sysdeps}"
+	/workspace/scripts/install_sysdeps.sh "${sysdeps}"
 fi
 
-if [ ! -z "${renv_lock}" ]; then
+if [ "${renv_lock}" != "None" ]; then
 	echo "Run restore renv"
-	/scripts/restore_renv.sh "${renv_version}"
+	/workspace/scripts/restore_renv.sh "${renv_version}"
 fi
 
-if [ ! -z "${other_pkg}" ]; then
+if [ "${other_pkg}" != "None" ]; then
 	echo "Run install_other_pkgs - packages: ${other_pkg}"
-	Rscript /scripts/install_other_pkgs.R "${repos}" "${other_pkg}"
+	Rscript /workspace/scripts/install_other_pkgs.R "${repos}" "${other_pkg}"
 fi
 
-if [ ! -z "${description}" ]; then
+if [ "${description}" != "None" ]; then
+	# set up R_LIBS_USER variable
+	echo "Update Renviron.site files"
+	echo "R_LIBS_USER=/usr/local/lib/R/site-library" >> $R_HOME/etc/Renviron.site
 	echo "Run install_pkgs_from_description"
-	cp $description ./DESCRIPTION
+	cd /workspace
 	Rscript -e "install.packages('devtools');devtools::install(force = TRUE)"
 fi
+
+echo "Installed Packages"
+R -e "installed_packages <- as.data.frame(installed.packages()); print(installed_packages[, c('Package', 'Version', 'LibPath')])"
