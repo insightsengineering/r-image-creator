@@ -36,7 +36,7 @@ if [ "${description}" != "None" ]; then
 	repos_list <- as.list(strsplit('$repos', ','))[[1]]
 	options(repos=repos_list)
 	install.packages('devtools')
-	devtools::install(force = TRUE)
+	devtools::install(force = TRUE, dependencies = TRUE)
 	"
 fi
 
