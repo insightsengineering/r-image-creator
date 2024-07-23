@@ -21,7 +21,7 @@ if [ -f "/workspace/renv.lock" ]; then {
 	mkdir -p $RENV_PATHS_CACHE $RENV_PATHS_LIBRARY $TMP_LIB
 	# Install remote
 	R -e "
-    install.packages(
+    utils::install.packages(
         'remotes',
         lib = '$TMP_LIB',
         repos = 'https://cloud.r-project.org'
